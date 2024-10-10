@@ -1,0 +1,9 @@
+.github
+dist
+node_modules
+*.log
+.DS_Store
+.parcel-cache
+.cache
+.idea
+test

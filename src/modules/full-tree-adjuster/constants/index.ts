@@ -1,0 +1,1 @@
+export const fta_class = "full-tree-adjuster";

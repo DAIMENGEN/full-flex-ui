@@ -1,0 +1,281 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "../../../../common/styles/scrollbar";
+
+.full-schedule, .full-schedule * {
+  box-sizing: border-box;
+}
+
+.full-schedule {
+  direction: ltr;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  font-size: 1em;
+  position: relative;
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1em;
+    table-layout: fixed;
+    width: 100%;
+
+    td, th {
+      padding: 0;
+      border: 1px solid $gray-400;
+    }
+
+    th {
+      text-align: center;
+    }
+  }
+
+  .full-schedule-view-harness {
+    flex-grow: 1;
+    position: relative;
+
+    .full-schedule-view {
+      inset: 0;
+      position: absolute;
+
+      .full-schedule-scrollgrid {
+        height: 100%;
+
+        .full-schedule-scrollgrid-section {
+
+          .full-schedule-scroller-harness {
+            height: 100%;
+            direction: ltr;
+            overflow: hidden;
+            position: relative;
+          }
+
+          .full-schedule-resource-timeline-divider {
+            cursor: col-resize;
+            width: 3px;
+            background-color: $gray-200;
+          }
+
+          .full-schedule-datagrid-cell-frame {
+            height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            .full-schedule-datagrid-cell-cushion {
+              overflow: hidden;
+              padding-left: 8px;
+              white-space: nowrap;
+            }
+          }
+
+        }
+
+        .full-schedule-scrollgrid-section-header > td {
+          border-bottom-style: hidden;
+        }
+
+        .full-schedule-scrollgrid-section-header {
+
+          .full-schedule-scroller-harness {
+
+            .full-schedule-scroller-header-left {
+              height: 100%;
+              overflow: hidden;
+
+              .full-schedule-datagrid-header {
+                height: 100%;
+
+                td, th {
+                  border-bottom-style: hidden;
+                }
+
+                .full-schedule-datagrid-cell-resizer {
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  cursor: col-resize;
+                  width: 10px;
+                  z-index: 1;
+                  right: -5px;
+                }
+              }
+            }
+
+            .full-schedule-scroller-header-right {
+              overflow: hidden scroll;
+
+              .full-schedule-timeline-header {
+                table tr:last-child {
+                  td, th {
+                    border-bottom-style: hidden;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .full-schedule-scrollgrid-section-body {
+
+          .full-schedule-scroller-harness {
+
+            .full-schedule-scroller-body-left {
+              inset: 0;
+              position: absolute;
+              overflow: scroll;
+            }
+
+            .full-schedule-scroller-body-left::-webkit-scrollbar {
+              width: 0;
+            }
+
+            .full-schedule-scroller-body-right {
+              inset: 0;
+              position: absolute;
+              overflow: scroll;
+            }
+          }
+
+          .full-schedule-timeline-body {
+            min-height: 100%;
+            position: relative;
+            z-index: 1;
+
+            .full-schedule-timeline-slots {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              z-index: 1;
+
+              .full-schedule-timeline-slot-frame {
+                height: 100%;
+              }
+            }
+
+            .full-schedule-timeline-slots > table {
+              height: 100%;
+            }
+
+            .full-schedule-timeline-drawing-board {
+
+              .full-schedule-timeline-lane-frame {
+                position: relative;
+
+                .full-schedule-timeline-lane {
+                  position: absolute;
+                  inset: 0;
+                  z-index: 1;
+                }
+
+                //.full-schedule-timeline-lane-bg {
+                //  position: absolute;
+                //  inset: 0;
+                //  z-index: 2;
+                //}
+
+                .full-schedule-timeline-events {
+                  position: relative;
+                  width: 0;
+                  z-index: 3;
+
+                  .full-schedule-timeline-event-harness {
+                    position: absolute;
+                    z-index: 2;
+
+                    .full-schedule-timeline-event {
+                      border-radius: 5px;
+                      display: flex;
+                      justify-content: space-between;
+
+                      .full-schedule-event-main {
+                        padding-left: 5px;
+                        font-size: 14px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      }
+                    }
+                  }
+                }
+
+                .full-schedule-timeline-milestones {
+                  position: relative;
+                  width: 0;
+                  z-index: 4;
+
+                  .full-schedule-timeline-milestone-harness {
+                    position: absolute;
+                    z-index: 2;
+
+                    .full-schedule-timeline-milestone {
+                      width: 100%;
+                      text-align: center;
+
+                      .full-schedule-milestone-main {
+                        svg {
+                          transition: transform 0.3s ease;
+                        }
+
+                        svg:hover {
+                          transform: scale(1.2);
+                          cursor: pointer;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                .full-schedule-timeline-checkpoints {
+                  position: relative;
+                  width: 0;
+                  z-index: 4;
+
+                  .full-schedule-timeline-checkpoint-harness {
+                    position: absolute;
+                    z-index: 2;
+
+                    .full-schedule-timeline-checkpoint {
+                      width: 100%;
+                      text-align: center;
+
+                      .full-schedule-checkpoint-main {
+                        svg {
+                          transition: transform 0.3s ease;
+                        }
+
+                        svg:hover {
+                          transform: scale(1.2);
+                          cursor: pointer;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        table {
+          border-left-style: hidden;
+          border-right-style: hidden;
+          border-top-style: hidden;
+        }
+      }
+    }
+  }
+
+  .full-schedule-icon {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-right: 1px;
+  }
+
+  .full-schedule-holiday {
+    background-color: $gray-200;
+  }
+}
+

@@ -1,0 +1,1 @@
+export {FullSearchSelect} from "./components/full-search-select";
