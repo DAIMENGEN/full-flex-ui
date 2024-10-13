@@ -1,4 +1,3 @@
-@import "node_modules/bootstrap/scss/bootstrap";
 @import "../../../../common/styles/scrollbar";
 
 .full-schedule, .full-schedule * {
@@ -22,7 +21,7 @@
 
     td, th {
       padding: 0;
-      border: 1px solid $gray-400;
+      border: 1px solid #CED4DA;
     }
 
     th {
@@ -53,7 +52,7 @@
           .full-schedule-resource-timeline-divider {
             cursor: col-resize;
             width: 3px;
-            background-color: $gray-200;
+            background-color: #E9ECEF;
           }
 
           .full-schedule-datagrid-cell-frame {
@@ -275,7 +274,7 @@
   }
 
   .full-schedule-holiday {
-    background-color: $gray-200;
+    background-color: #E9ECEF;
   }
 }
 

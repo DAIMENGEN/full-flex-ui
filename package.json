@@ -1,6 +1,6 @@
 {
   "name": "full-flex-ui",
-  "author": "dai19980722@gmail.com",
+  "author": "mengen.dai@outlook.com",
   "module": "dist/full-flex-ui.esm.js",
   "version": "1.0.0-alpha.2",
   "repository": {
@@ -76,7 +76,6 @@
     "@types/react-redux": "^7.1.33",
     "@types/resize-observer-browser": "^0.1.11",
     "antd": "^5.18.0",
-    "bootstrap": "^5.3.3",
     "dayjs": "^1.11.11",
     "html2canvas": "^1.4.1",
     "husky": "^9.0.11",
