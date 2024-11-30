@@ -1,5 +1,5 @@
+import localStorage from "redux-persist/lib/storage";
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {persistReducer, persistStore} from "redux-persist";
 import resourceReducer from "./resource/resource-slice";
 
@@ -9,7 +9,7 @@ const reducers = combineReducers({
 
 const persistConfig = {
     key: "full-schedule",
-    storage: AsyncStorage,
+    storage: localStorage,
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers);

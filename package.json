@@ -2,7 +2,7 @@
   "name": "full-flex-ui",
   "author": "mengen.dai@outlook.com",
   "module": "dist/full-flex-ui.esm.js",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/DAIMENGEN/full-flex-ui.git"
@@ -66,10 +66,8 @@
   "devDependencies": {
     "@ant-design/icons": "^5.3.7",
     "@babel/preset-react": "^7.24.6",
-    "@react-native-async-storage/async-storage": "^1.23.1",
     "@reduxjs/toolkit": "^2.2.5",
     "@size-limit/preset-small-lib": "^11.1.4",
-    "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20.14.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
