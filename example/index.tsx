@@ -40,6 +40,7 @@ const App = () => {
                                             selectable={true}
                                             lineHeight={40}
                                             slotMinWidth={50}
+                                            defaultEmptyLanes={100}
                                             scheduleMaxHeight={1000}
                                             scheduleViewType={"Day"}
                                             resources={mockResources}

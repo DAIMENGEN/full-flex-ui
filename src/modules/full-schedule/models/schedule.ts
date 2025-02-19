@@ -45,7 +45,8 @@ import {
     ResourceLabelContextMenuArg,
     ResourceLabelMountArg,
     ResourceLaneContextMenuArg,
-    ResourceLaneMountArg
+    ResourceLaneMountArg,
+    ResourceUtils
 } from "./resource";
 import dayjs from "dayjs";
 import {ScheduleView, ScheduleViewType} from "./schedule-view";
@@ -70,6 +71,7 @@ export type ScheduleProps = {
     companyHolidays?: Array<dayjs.Dayjs>;
     specialWorkdays?: Array<dayjs.Dayjs>;
     nationalHolidays?: Array<dayjs.Dayjs>;
+    defaultEmptyLanes?: number;
     resourceAreaWidth?: string;
     resourceAreaColumns?: Array<ResourceAreaColumn>;
     // event.
@@ -171,7 +173,7 @@ export class ScheduleApi implements PublicScheduleApi {
         this.scheduleProps = props;
         this.scheduleView = scheduleView;
         this.timelineApi = this.generateTimelineApi(props);
-        this.resourceApis = ResourceApiHelper.createTree(props.resources, this.eventApis, this.milestoneApis, this.checkpointApis);
+        this.resourceApis = ResourceApiHelper.createTree([...props.resources, ...ResourceUtils.createEmptyResources(props.defaultEmptyLanes || 0)], this.eventApis, this.milestoneApis, this.checkpointApis);
         this.flatMapResourceApis = ResourceApiHelper.flatMapTree(this.resourceApis);
     }
 

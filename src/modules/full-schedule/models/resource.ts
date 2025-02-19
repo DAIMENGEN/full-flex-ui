@@ -252,6 +252,22 @@ export class ResourceApiHelper {
     }
 }
 
+export class ResourceUtils {
+    static createEmptyResources(count: number): Array<Resource> {
+        return Array.from({length: count}, (_, index) => {
+            const timestamp = Date.now();
+            const order = timestamp + index;
+            return {
+                id: `empty-resource-${order}`,
+                title: "",
+                extendedProps: {
+                    order: order
+                }
+            }
+        });
+    }
+}
+
 export type PublicResourceApi = Pick<ResourceApi, PublicResourceApiMethods>;
 
 export type PublicResourceApiMethods =
