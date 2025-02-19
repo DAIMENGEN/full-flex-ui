@@ -31,7 +31,8 @@ export const FullScheduleGanttChart: React.FC<ScheduleProps> = (props) => {
         event.preventDefault();
         const resourceAreaCol = resourceAreaColRef.current;
         if (resourceAreaCol) {
-            const offset = event.clientX - resourceAreaCol.offsetLeft;
+            const rect = resourceAreaCol.getBoundingClientRect();
+            const offset = event.clientX - rect.left;
             resourceAreaCol.style.width = StyleUtil.numberToPixels(offset);
             fullScheduleDispatch(changeResourceAreaWidth(resourceAreaCol.style.width));
         }
