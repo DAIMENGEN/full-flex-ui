@@ -1,7 +1,8 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import {FullColorPicker, FullDraggableModal, FullSchedule, FullSearchSelect, FullTreeAdjuster} from "../dist";
 import "../dist/full-flex-ui.css";
+import * as React from "react";
+import {useState} from "react";
+import * as ReactDOM from "react-dom/client";
+import {FullColorPicker, FullDraggableModal, FullSchedule, FullTreeAdjuster} from "../dist";
 import {mockResources} from "./mock-data/mock-resources";
 import {mockEvents} from "./mock-data/mock-events";
 import {mockCheckpoints} from "./mock-data/mock-checkpoints";
@@ -23,7 +24,6 @@ import {
     ScheduleMountArg,
     SelectInfoArg,
 } from "../dist/modules/full-schedule";
-import {useState} from "react";
 
 const App = () => {
     const [openFullDraggableModel, setOpenFullDraggableModel] = useState(false);
@@ -163,27 +163,10 @@ const App = () => {
                 },
                 {
                     key: "4",
-                    label: "FullSearchSelect",
-                    children: <FullSearchSelect width={200}
-                                                fetchOptions={() => fetch('https://randomuser.me/api/?results=5')
-                                                    .then((response) => response.json())
-                                                    .then((body) =>
-                                                        body.results.map(
-                                                            (user: {
-                                                                name: { first: string; last: string };
-                                                                login: { username: string }
-                                                            }) => ({
-                                                                label: `${user.name.first} ${user.name.last}`,
-                                                                value: user.login.username,
-                                                            }),
-                                                        ),
-                                                    )}/>,
-                },
-                {
-                    key: "5",
                     label: "FullDraggableModal",
                     children: <div>
-                        <Button type={`primary`} onClick={() => setOpenFullDraggableModel(true)}>OpenFullDraggableModel</Button>
+                        <Button type={`primary`}
+                                onClick={() => setOpenFullDraggableModel(true)}>OpenFullDraggableModel</Button>
                         <FullDraggableModal title="Full Draggable Modal"
                                             destroyOnClose={true}
                                             open={openFullDraggableModel}
