@@ -43,12 +43,13 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
         const scheduleApi = props.scheduleApi;
         const scheduleView = scheduleApi.getScheduleView();
         const timelineView = scheduleView.getTimelineView();
+        const laneHeight = timelineView.calculateLaneHeight(props.resourceApi);
         const slotWidth = timelineView.calculateSlotWidth(props.timelineWidth);
         const multiple = Math.floor(offsetX / slotWidth);
         const distance = multiple * slotWidth;
         const left = StyleUtil.numberToPixels(distance);
         const right = StyleUtil.numberToPixels(props.timelineWidth - distance - slotWidth);
-        const height = StyleUtil.numberToPixels(scheduleApi.getLineHeight());
+        const height = StyleUtil.numberToPixels(laneHeight);
         const selectedArea = document.createElement("div");
         selectedArea.className = timelineLaneSelectedArea;
         Object.assign(selectedArea.style, {
