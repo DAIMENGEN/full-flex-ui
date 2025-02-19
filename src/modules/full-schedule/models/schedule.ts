@@ -58,6 +58,7 @@ export type ScheduleProps = {
     end: dayjs.Dayjs;
     start: dayjs.Dayjs;
     editable: boolean;
+    selectable: boolean;
     lineHeight: number;
     slotMinWidth: number;
     scheduleMaxHeight: number;
@@ -241,6 +242,10 @@ export class ScheduleApi implements PublicScheduleApi {
     isEditable(): boolean {
         const viewType = this.scheduleProps.scheduleViewType;
         return this.scheduleProps.editable && viewType == "Day";
+    }
+
+    isSelectable(): boolean {
+        return this.scheduleProps.selectable;
     }
 
     getMilestoneApis(): Array<MilestoneApi> {
@@ -472,6 +477,8 @@ export interface PublicScheduleApi {
     getFlatMapResourceApis(): Array<PublicResourceApi>;
 
     isEditable(): boolean;
+
+    isSelectable(): boolean;
 
     getMilestoneApis(): Array<PublicMilestoneApi>;
 

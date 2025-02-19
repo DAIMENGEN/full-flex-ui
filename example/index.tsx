@@ -37,6 +37,7 @@ const App = () => {
                     children: <FullSchedule start={dayjs("2024-08-10")}
                                             end={dayjs("2024-09-09")}
                                             editable={true}
+                                            selectable={true}
                                             lineHeight={40}
                                             slotMinWidth={50}
                                             scheduleMaxHeight={1000}

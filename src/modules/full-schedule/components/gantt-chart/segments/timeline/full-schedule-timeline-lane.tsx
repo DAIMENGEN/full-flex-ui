@@ -118,8 +118,11 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
         if (isMoveable && timelineLane) {
             timelineLane.style.zIndex = "1";
             isMoveableRef.current = false;
-            const length = props.resourceApi.getEventApis().length;
-            Math.sign(length) === 1 ? warning() : callSelectAllow(timelineLane);
+            const editable = props.scheduleApi.isEditable();
+            if (editable) {
+                const length = props.resourceApi.getEventApis().length;
+                Math.sign(length) === 1 ? warning() : callSelectAllow(timelineLane);
+            }
             removeSelectedArea(timelineLane);
         }
     }, [props, warning, callSelectAllow, removeSelectedArea]);
@@ -139,7 +142,7 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
     }, [props, warning, callSelectAllow, removeSelectedArea]);
 
     return (
-        <ConditionalRenderer condition={props.scheduleApi.isEditable()} fallback={<div className={`${fs_class}-timeline-lane`}/>}>
+        <ConditionalRenderer condition={props.scheduleApi.isSelectable()} fallback={<div className={`${fs_class}-timeline-lane`}/>}>
             <div className={`${fs_class}-timeline-lane`} onMouseUp={handleMouseUp} onMouseOut={handleMouseOut} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} ref={timelineLaneRef}>
                 {contextHolder}
             </div>
