@@ -97,6 +97,7 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
         event.preventDefault();
         const timelineLane = timelineLaneRef.current;
         if (timelineLane) {
+            timelineLane.style.zIndex = "5";
             isMoveableRef.current = true;
             startXRef.current = event.clientX;
             createSelectedArea(timelineLane, event.nativeEvent.offsetX);
@@ -115,6 +116,7 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
         const isMoveable = isMoveableRef.current;
         const timelineLane = timelineLaneRef.current;
         if (isMoveable && timelineLane) {
+            timelineLane.style.zIndex = "1";
             isMoveableRef.current = false;
             const length = props.resourceApi.getEventApis().length;
             Math.sign(length) === 1 ? warning() : callSelectAllow(timelineLane);
@@ -128,6 +130,7 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
         const target = event.relatedTarget as Node;
         const timelineLane = timelineLaneRef.current;
         if (isMoveable && timelineLane && !timelineLane.contains(target)) {
+            timelineLane.style.zIndex = "1";
             isMoveableRef.current = false;
             const length = props.resourceApi.getEventApis().length;
             Math.sign(length) === 1 ? warning() : callSelectAllow(timelineLane);
