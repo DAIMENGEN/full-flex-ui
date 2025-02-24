@@ -12,6 +12,7 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
     const startRightRef = useRef<number>(0);
     const isMoveableRef = useRef(false);
     const [messageApi, contextHolder] = message.useMessage();
+    const animationFrameRef = useRef<number | null>(null);
     const timelineLaneRef = useRef<HTMLDivElement | null>(null);
     const timelineLaneSelectedArea = useMemo(() => `${fs_class}-timeline-lane-selected-area`, []);
     const warning = useCallback(() => {
@@ -70,28 +71,33 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
     }, []);
 
     const updateSelectedArea = useCallback((element: HTMLDivElement, clientX: number) => {
-        const selectedArea = element.querySelector(`.${timelineLaneSelectedArea}`) as HTMLDivElement;
-        if (selectedArea) {
-            const scheduleApi = props.scheduleApi;
-            const scheduleView = scheduleApi.getScheduleView();
-            const timelineView = scheduleView.getTimelineView();
-            const slotWidth = timelineView.calculateSlotWidth(props.timelineWidth);
-            const deltaX = clientX - startXRef.current;
-            const offsetRatio = deltaX / slotWidth;
-            if (Math.sign(deltaX) === 1) {
-                // update right.
-                const multiple = Math.floor(offsetRatio);
-                const distance = multiple * slotWidth;
-                const newRight = Math.max(startRightRef.current - distance, 0);
-                selectedArea.style.right = StyleUtil.numberToPixels(newRight);
-            } else if (Math.sign(deltaX) === -1) {
-                // update left.
-                const multiple = Math.ceil(offsetRatio);
-                const distance = multiple * slotWidth;
-                const newLeft = Math.max(startLeftRef.current + distance, 0)
-                selectedArea.style.left = StyleUtil.numberToPixels(newLeft);
-            }
+        if (animationFrameRef.current) {
+            cancelAnimationFrame(animationFrameRef.current);
         }
+        animationFrameRef.current = requestAnimationFrame(() => {
+            const selectedArea = element.querySelector(`.${timelineLaneSelectedArea}`) as HTMLDivElement;
+            if (selectedArea) {
+                const scheduleApi = props.scheduleApi;
+                const scheduleView = scheduleApi.getScheduleView();
+                const timelineView = scheduleView.getTimelineView();
+                const slotWidth = timelineView.calculateSlotWidth(props.timelineWidth);
+                const deltaX = clientX - startXRef.current;
+                const offsetRatio = deltaX / slotWidth;
+                if (Math.sign(deltaX) === 1) {
+                    // update right.
+                    const multiple = Math.floor(offsetRatio);
+                    const distance = multiple * slotWidth;
+                    const newRight = Math.max(startRightRef.current - distance, 0);
+                    selectedArea.style.right = StyleUtil.numberToPixels(newRight);
+                } else if (Math.sign(deltaX) === -1) {
+                    // update left.
+                    const multiple = Math.ceil(offsetRatio);
+                    const distance = multiple * slotWidth;
+                    const newLeft = Math.max(startLeftRef.current + distance, 0)
+                    selectedArea.style.left = StyleUtil.numberToPixels(newLeft);
+                }
+            }
+        });
     }, [props]);
 
     const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = useCallback(event => {
