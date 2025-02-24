@@ -81,16 +81,18 @@ export const FullScheduleTimelineLane: React.FC<{ scheduleApi: ScheduleApi, reso
                 const scheduleView = scheduleApi.getScheduleView();
                 const timelineView = scheduleView.getTimelineView();
                 const slotWidth = timelineView.calculateSlotWidth(props.timelineWidth);
+                const rect = selectedArea.getBoundingClientRect();
                 const deltaX = clientX - startXRef.current;
-                const offsetRatio = deltaX / slotWidth;
                 if (Math.sign(deltaX) === 1) {
                     // update right.
+                    const offsetRatio = (clientX - rect.left) / slotWidth;
                     const multiple = Math.floor(offsetRatio);
                     const distance = multiple * slotWidth;
                     const newRight = Math.max(startRightRef.current - distance, 0);
                     selectedArea.style.right = StyleUtil.numberToPixels(newRight);
                 } else if (Math.sign(deltaX) === -1) {
                     // update left.
+                    const offsetRatio = (clientX - rect.right) / slotWidth;
                     const multiple = Math.ceil(offsetRatio);
                     const distance = multiple * slotWidth;
                     const newLeft = Math.max(startLeftRef.current + distance, 0)
